@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Game Tamagotchi: Capybara</title>
+  <link rel="stylesheet" type="text/css" href="style1.css">
+</head>
+<body id="body1">
+  <div id="game-container">
+    <div id="pet-container">
+      <img id="pet-image" src="dino/masbro_maen_kecil.jfif">
+    <div id="pet-status">
+      <div class="status-bar">
+        <div id="hunger-bar" class="bar"></div>
+        <span id="hunger-label" class="label">Hunger</span>
+      </div>
+      <div class="status-bar">
+        <div id="happiness-bar" class="bar"></div>
+        <span id="happiness-label" class="label">Happiness</span>
+      </div>
+      <div class="status-bar">
+        <div id="energy-bar" class="bar"></div>
+        <span id="energy-label" class="label">Energy</span>
+      </div>
+      <div class="status-bar">
+        <div id="health-bar" class="bar"></div>
+        <span id="health-label" class="label">Health</span>
+      </div>
+    </div>    
+    <div id="button-container">
+      <button id="home-button">Home</button>
+      <button id="feed-button">Feed</button>
+      <button id="play-button">Play</button>
+      <button id="sleep-button">Sleep</button>
+      <button id="medicine-button">Medicine</button>
+    </div>
+    <div id="main-page" class="page" style="display:none;">
+      <h1>Welcome to Tamagotchi Game!</h1>
+    </div>
+    <div id="feed-page" class="page" style="display:none;" >
+      <h1>Giving Capybara some Snacks</h1>
+      <img src="dino/masbro donat.jpg">
+    </div>
+    <div id="play-page" class="page" style="display:none; text-align: center">
+      <h1>Playing with Capybara!</h1>
+      <img src="dino/masbro_maen_remaja.jpg">
+      <a href="cobagame31.html"><h3>Game Snake</h3></a>
+      <a href="cobagame32.html"><h3>Game Running T-Rex</h3></a>
+    </div>
+    <div id="sleep-page" class="page" style="display:none;">
+      <h1>Giving Capybara some Sleep</h1>
+      <img src="dino/masbro_tidur.jpg">
+    </div>
+    <div id="medicine-page" class="page" style="display:none;">
+      <h1>Restore Capybara's Health</h1>  
+      <img src="dino/masbro_tidur_2.jpg">
+    </div>
+  </div>
+  <div id = "greeting" style="color: white;"> </div>
+  <div id = "digital-clock"> </div>
+  <script type="text/javascript">
+      const pet = {
+      name: "Shiba Inu",
+      hunger: 100,
+      happiness: 100,
+      energy: 100,
+      health: 100,
+
+      home: function() {
+        this.showMainPage();
+      },
+      feed: function() {
+        this.hunger += 10;
+        if (this.hunger > 100) {
+          this.hunger = 100;
+        }
+        this.updateStatus();
+        this.showFeedPage();
+      },
+
+      play: function() {
+        this.happiness += 10;
+        if (this.happiness > 100) {
+          this.happiness = 100;
+        }
+        this.energy -= 10;
+        if (this.energy < 0) {
+          this.energy = 0;
+        }
+        this.updateStatus();
+        this.showPlayPage();
+      },
+
+      sleep: function() {
+        this.energy += 10;
+        if (this.energy > 100) {
+            this.energy = 100;
+        }
+        this.updateStatus();
+        this.showSleepPage(); // tambahkan ini
+      },
+
+      medicine: function(){
+        this.health += 10;
+        if (this.health > 100) {
+            this.health = 100;
+        }
+        this.updateStatus();
+        this.showMedicinePage();
+      },
+
+        updateStatus: function() {
+          document.getElementById("hunger-bar").style.width = this.hunger + "%";
+          document.getElementById("happiness-bar").style.width = this.happiness + "%";
+          document.getElementById("energy-bar").style.width = this.energy + "%";
+          document.getElementById("health-bar").style.width = this.health + "%";
+          
+          document.getElementById("hunger-label").textContent = "Hunger: " + this.hunger + "%";
+          document.getElementById("happiness-label").textContent = "Happiness: " + this.happiness + "%";
+          document.getElementById("energy-label").textContent = "Energy: " + this.energy + "%";
+          document.getElementById("health-label").textContent = "Health: " + this.health + "%";
+        },
+
+        showPlayPage: function() {
+          document.getElementById("main-page").style.display = "none";
+          document.getElementById("sleep-page").style.display = "none";
+          document.getElementById("feed-page").style.display = "none";
+          document.getElementById("medicine-page").style.display = "none";
+          document.getElementById("play-page").style.display = "block";
+        },
+
+        showSleepPage: function() {
+          document.getElementById("main-page").style.display = "none";
+          document.getElementById("play-page").style.display = "none";
+          document.getElementById("feed-page").style.display = "none";
+          document.getElementById("medicine-page").style.display = "none";
+          document.getElementById("sleep-page").style.display = "block";
+        },
+        showMainPage: function() {
+          document.getElementById("play-page").style.display = "none";
+          document.getElementById("sleep-page").style.display = "none";
+          document.getElementById("feed-page").style.display = "none";
+          document.getElementById("medicine-page").style.display = "none";
+          document.getElementById("main-page").style.display = "block";
+          pet.updateStatus();
+        },
+        showFeedPage: function() {
+          document.getElementById("main-page").style.display = "none";
+          document.getElementById("play-page").style.display = "none";
+          document.getElementById("sleep-page").style.display = "none";
+          document.getElementById("medicine-page").style.display = "none";
+          document.getElementById("feed-page").style.display = "block";
+        },
+        showMedicinePage: function(){
+          document.getElementById("main-page").style.display = "none";
+          document.getElementById("play-page").style.display = "none";
+          document.getElementById("sleep-page").style.display = "none";
+          document.getElementById("feed-page").style.display = "none";
+          document.getElementById("medicine-page").style.display = "block";
+        },
+
+      decreaseLevels: function() {
+          this.hunger -= 5;
+          this.happiness -= 5;
+          this.energy -= 5;
+          this.health -= 2;
+          if (this.health < 0) {
+            this.health = 0;
+          }
+          this.updateStatus();
+        }
+      };
+
+      const homeButton = document.getElementById("home-button");
+      homeButton.addEventListener("click", function() {
+        pet.home();
+        pet.showMainPage(); // ubah menjadi showFeedPage()
+      });
+
+      const feedButton = document.getElementById("feed-button");
+      feedButton.addEventListener("click", function() {
+        pet.feed();
+        pet.showFeedPage(); // ubah menjadi showFeedPage()
+      });
+
+
+      const playButton = document.getElementById("play-button");
+      playButton.addEventListener("click", function() {
+        pet.play();
+        pet.showPlayPage(); // tambahkan ini
+      });
+
+
+      const sleepButton = document.getElementById("sleep-button");
+      sleepButton.addEventListener("click", function() {
+        pet.sleep();
+        pet.showSleepPage(); // tambahkan ini
+      });
+
+      const medicineButton = document.getElementById("medicine-button");
+      medicineButton.addEventListener("click", function() {
+        pet.medicine();
+        pet.showMedicinePage(); // ubah menjadi showFeedPage()
+      });
+
+      setInterval(function() {
+        pet.decreaseLevels();
+      }, 60000); // akan menurunkan nilai setiap 1 menit (60000 milidetik)
+
+      function Time() {
+
+        // Creating object of the Date class
+        var date = new Date();
+
+        // Get current hour
+        var hour = date.getHours();
+        // Get current minute
+        var minute = date.getMinutes();
+        // Get current second
+        var second = date.getSeconds();
+
+        // Variable to store AM / PM
+        var period = "";
+
+        // Assigning AM / PM according to the current hour
+        if (hour >= 12) {
+            period = "PM";
+        } else {
+            period = "AM";
+        }
+
+        if (period == "AM") {//Day
+            document.getElementById("body1").style.backgroundColor = "powderblue";
+                var type = "Day";//Time describer word
+        } else {//Night
+                document.getElementById("body1").style.backgroundColor = "midnightblue";
+                var type = "Night";//Time describer word
+        }
+
+
+        // Converting the hour in 12-hour format
+        if (hour == 0) {
+            hour = 12;
+        } else {
+            if (hour > 12) {
+                    hour = hour - 12;
+            }
+        }
+
+        // Updating hour, minute, and second
+         // if they are less than 10
+        hour = update(hour);
+        minute = update(minute);
+        second = update(second);
+
+        // Adding time elements to the div
+        document.getElementById("digital-clock").innerText = hour + " : " + minute + " : " + second + " " + period;
+        document.getElementById("greeting").innerText = "Selamat datang!" + " Sekarang pukul " + hour + " : " + minute + " : " + second + " " + period;
+        // Set Timer to 1 sec (1000 ms)
+        setTimeout(Time, 1000);
+        }
+
+        // Function to update time elements if they are less than 10
+        // Append 0 before time elements if they are less than 10
+        function update(t) {
+            if (t < 10) {
+                return "0" + t;
+            }
+            else {
+                return t;
+            }
+        }
+
+        Time();
+        </script>
+
+        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+        <script type='text/javascript'>
+        //<![CDATA[
+        $(document).ready(function(){
+        var tg = new Date();
+        var jm = tg.getHours();
+        if (jm > 5 && jm < 8)
+        document.body.className = "pagi";
+        else if (jm > 8 && jm < 16)
+        document.body.className = "siang";
+        else if (jm > 16 && jm < 19)
+        document.body.className = "sore";
+        else if (jm > 19 || jm < 5)
+        document.body.className = "malam";
+        });
+        //]]>
+        </script>
+
+    <a href="Login.html"><h3>Back to Login</h3></a>
+    <a href="Play.HTML"><h3>Back to Choose Pet</h3></a>
+
+    </body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Play</title>
+    <link rel="stylesheet" href="style.css"> 
+    </head>
+
+  <body>
+    <div id="Login">
+      <div id="play">
+        <div id="logo">
+          <a href="#">
+              <img src="img/logo.jpg"/>
+              <p>UMNcare</p>
+            </a>
+        </div>
+      </div>
+    </div>
+    <div id="Pet">
+      <p class="sub">Choose your Pet</p>
+      <div id="dino">
+        <a href="#" class="button"></a>
+        <img src="icons/dino1.jpg"></div>
+        <div class="button-container">
+          <button class="prev-button" onclick="prevImage()">&lt;</button>
+          <button class="next-button" onclick="nextImage()">&gt;</button>
+        </div>
+        <h1>Give your pet name</h1>
+      <form>
+          <input class="sub" type="text" name="Name" placeholder="Enter Your Pet Name"/>
+      </form>
+      <br></br>
+      <div id="Play">
+      <button class="play">Play</button>
+      <br></br>
+    </div>
+    <div id="footer">
+      <footer id="footerBottom" class="d-flex flex-wrap justify-content-center align-items-center py-3 fixed-bottom">
+       <div>
+            <span class="text-light">Have fun!</span>
+          </div>
+      </footer>
+  </div>
+<script>
+      var images = ["icons/dino1.jpg", "icons/masbro_tidur_3.jpg", "icons/shiba_inu_pilihan.jpg"];
+      var icons = 0;
+
+      function nextImage() {
+        icons++;
+        if (icons >= images.length) {
+          icons = 0;
+        }
+        document.getElementById("dino").getElementsByTagName("img")[0].src = images[icons];
+      }
+
+      function prevImage() {
+        icons--;
+        if (icons < 0) {
+          icons = images.length - 1;
+        }
+        document.getElementById("dino").getElementsByTagName("img")[0].src = images[icons];
+      }
+
+      var button = document.querySelector('.button');
+      var playButton = document.querySelector('.play');
+      var petImage = document.getElementById('dino').getElementsByTagName('img')[0];
+
+
+playButton.addEventListener('click', function() {
+  var petName = document.getElementsByName('Name')[0].value;
+  if (petImage.src.includes('icons/dino1.jpg')) {
+    window.location.href = 'UTS PTI LEC.html?name=' + petName;
+  } else if (petImage.src.includes('icons/masbro_tidur_3.jpg')) {
+    window.location.href = 'UTS PTI LEC 3.html?name=' + petName;
+  } else if (petImage.src.includes('icons/shiba_inu_pilihan.jpg')) {
+    window.location.href = 'UTS PTI LEC 2.html?name=' + petName;
+  }
+});
+
+     
+</script>
+
+  </body>
+</html>
